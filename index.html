@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Digital · Carlos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────────
+   TOKENS
+   Light theme — Impeccable + Taste Skill
+   Accent: #9B7A3E (dark gold, WCAG AA on white)
+───────────────────────────────────────── */
+:root {
+  --bg:      #FFFFFF;
+  --surface: #F7F6F3;
+  --ink:     #0F0F0E;
+  --body:    #2E2C28;
+  --sub:     #6B6760;
+  --faint:   #C8C5BE;
+  --border:  #E3E0D8;
+  --gold:    #9B7A3E;   /* dark enough for AA contrast on white */
+  --gold-bg: #F9F5EC;
+  --gold-bd: #D4B97A;
+  --green:   #2D6A4F;
+  --red:     #9B2335;
+  --max:     820px;
+  --gutter:  clamp(16px, 5vw, 32px);
+  --serif:   'Playfair Display', Georgia, serif;
+  --sans:    'Outfit', 'Helvetica Neue', sans-serif;
+  --mono:    'DM Mono', 'Courier New', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LAYOUT ─── */
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-of-type { border-bottom: none; }
+
+/* ─── TYPOGRAPHY ─── */
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(30px, 6vw, 54px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Section label */
+.label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+p { color: var(--body); }
+.sub  { color: var(--sub); }
+.gold { color: var(--gold); }
+.ink  { color: var(--ink); }
+
+/* ─── COMPONENTS ─── */
+
+/* Tag chip */
+.chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+
+/* Pill */
+.pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--sub);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+/* Cards */
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+}
+.card-accent {
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  border-radius: 10px;
+  padding: 24px;
+}
+.card-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  padding: 80px var(--gutter) 64px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 60%, rgba(155,122,62,.18) 0%, transparent 55%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.02) 40px);
+  pointer-events: none;
+}
+.hero .label { color: var(--gold-bd); }
+.hero .label::before { background: var(--gold-bd); }
+.hero h1 { color: #F5F0E8; max-width: 560px; }
+.hero p  { color: #9A9690; max-width: 440px; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.hero-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-bd);
+  background: rgba(155,122,62,.12);
+  border: 1px solid rgba(155,122,62,.35);
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+@media (max-width:600px) { .hero { padding: 56px var(--gutter) 48px; } }
+
+/* ─── STATS BAR ─── */
+.stats-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 22px var(--gutter);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.stat { text-align: center; }
+.stat-v {
+  font-family: var(--serif);
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 700;
+  color: var(--gold);
+}
+.stat-l {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--sub);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ─── DELIVERABLES GRID ─── */
+.del-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/* ─── PACKAGES ─── */
+.pkg {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 26px;
+  position: relative;
+  transition: box-shadow .2s;
+}
+.pkg-featured {
+  border-color: var(--gold);
+  background: var(--gold-bg);
+}
+.pkg-badge {
+  position: absolute;
+  top: -11px;
+  left: 22px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--bg);
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+.pkg-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 520px) {
+  .pkg-layout { grid-template-columns: 1fr; }
+  .pkg-price { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 4px; }
+}
+.pkg-price { text-align: right; flex-shrink: 0; min-width: 110px; }
+.price-big {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.price-mo {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--sub);
+  margin-top: 6px;
+}
+.price-note {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--sub);
+  margin-top: 2px;
+}
+.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+
+/* ─── WEB DEMO ─── */
+.browser {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+}
+.browser-bar {
+  background: var(--surface);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.b-dot { width: 10px; height: 10px; border-radius: 50%; }
+.b-url {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--sub);
+}
+
+/* Web hero — dark inside browser */
+.w-hero {
+  background: #0F0F0E;
+  padding: clamp(28px,5vw,48px) clamp(16px,4vw,32px);
+  position: relative;
+  overflow: hidden;
+}
+.w-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 70% 40%, rgba(155,122,62,.12) 0%, transparent 55%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.03) 40px);
+  pointer-events: none;
+}
+.w-label { font-family: var(--mono); font-size: 9px; color: #9B7A3E; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: block; }
+.w-title { font-family: var(--serif); font-size: clamp(22px,5vw,36px); font-weight: 700; color: #F5F0E8; margin-bottom: 6px; }
+.w-sub   { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; color: #9A9690; text-transform: uppercase; margin-bottom: 10px; display: block; }
+.w-desc  { font-size: 13px; color: #6B6760; max-width: 320px; margin-bottom: 22px; line-height: 1.7; }
+.w-btns  { display: flex; gap: 10px; flex-wrap: wrap; }
+.w-btn-p { background: #9B7A3E; color: #fff; font-family: var(--serif); font-size: 11px; letter-spacing: 1.5px; padding: 10px 20px; border-radius: 2px; cursor: default; }
+.w-btn-g { background: transparent; color: #6B6760; font-family: var(--serif); font-size: 11px; letter-spacing: 1.5px; padding: 10px 20px; border-radius: 2px; border: 1px solid #2E2C2822; cursor: default; }
+
+/* Web stats mini */
+.w-stats {
+  background: #141418;
+  border-top: 1px solid #1E1E26;
+  border-bottom: 1px solid #1E1E26;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+}
+.w-stat-v { font-family: var(--serif); font-size: 16px; color: #C8A96E; font-weight: 700; }
+.w-stat-l { font-family: var(--mono); font-size: 9px; color: #58565E; letter-spacing: 1px; margin-top: 1px; }
+
+/* Web services */
+.w-svcs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1px;
+  background: #1E1E26;
+}
+.w-svc {
+  background: #111115;
+  padding: 14px 16px;
+}
+.w-svc-n { font-family: var(--serif); font-size: 12px; color: #EDE8DC; margin-bottom: 3px; }
+.w-svc-p { font-size: 11px; color: #58565E; }
+
+/* Web chat */
+.w-chat { background: #0E0E12; border-top: 1px solid #1E1E26; padding: 18px 20px; }
+.chat-lbl { font-family: var(--mono); font-size: 9px; color: #58565E; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+.msg { display: flex; gap: 8px; margin-bottom: 10px; align-items: flex-end; }
+.msg-av { width: 22px; height: 22px; border-radius: 50%; background: rgba(200,169,110,.15); border: 1px solid rgba(200,169,110,.3); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.msg-b { max-width: 78%; padding: 9px 13px; border-radius: 12px 12px 12px 3px; font-size: 12px; line-height: 1.6; background: #1A1A22; border: 1px solid #1E1E26; color: #EDE8DC; }
+.msg-u { margin-left: auto; flex-direction: row-reverse; }
+.msg-u .msg-b { border-radius: 12px 12px 3px 12px; background: #9B7A3E; color: #fff; border: none; }
+.quick-r { display: flex; gap: 6px; flex-wrap: wrap; padding-left: 30px; margin-top: 6px; }
+.qr-btn { font-family: var(--mono); font-size: 9px; color: #C8A96E; background: transparent; border: 1px solid #1E1E26; border-radius: 3px; padding: 4px 9px; }
+
+/* Web contact */
+.w-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #141418;
+  border-top: 1px solid #1E1E26;
+}
+@media (max-width: 480px) { .w-contact { grid-template-columns: 1fr; } }
+.w-contact-col { padding: 20px; }
+.w-contact-col:first-child { border-right: 1px solid #1E1E26; }
+.w-sec-lbl { font-family: var(--serif); font-size: 9px; letter-spacing: 3px; color: #C8A96E; text-transform: uppercase; margin-bottom: 14px; display: block; }
+.w-info-row { margin-bottom: 12px; }
+.w-info-k { font-family: var(--mono); font-size: 9px; color: #58565E; letter-spacing: 2px; display: block; margin-bottom: 2px; }
+.w-info-v { font-size: 13px; color: #EDE8DC; line-height: 1.5; }
+.w-hor-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1E1E26; }
+.w-hor-row:last-child { border-bottom: none; }
+.w-hor-d { font-family: var(--serif); font-size: 12px; color: #EDE8DC; }
+.w-hor-h { font-family: var(--mono); font-size: 11px; color: #C8A96E; }
+.w-hor-row.closed .w-hor-d { color: #58565E; }
+.w-hor-row.closed .w-hor-h { color: #8B2020; }
+
+/* ─── FEED MANAGER ─── */
+.feed-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+.feed-post {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+}
+.feed-emoji { font-size: clamp(28px, 6vw, 44px); }
+.feed-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.65));
+  padding: 10px 8px 7px;
+}
+.feed-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,.85);
+  text-transform: uppercase;
+}
+
+.caption-ex {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 8px;
+}
+.cap-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.cap-text { font-size: 13px; color: var(--body); line-height: 1.6; margin-bottom: 4px; }
+.cap-tags { font-family: var(--mono); font-size: 10px; color: var(--sub); }
+
+/* Calendar */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.cal-hdr { font-family: var(--mono); font-size: 10px; color: var(--sub); text-align: center; padding-bottom: 4px; }
+.cal-day {
+  aspect-ratio: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cal-day.post { background: var(--gold-bg); border-color: var(--gold-bd); }
+.cal-day span { font-family: var(--mono); font-size: clamp(9px, 2vw, 11px); color: var(--sub); }
+.cal-day.post span { color: var(--gold); font-weight: 500; }
+.cal-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin-top: 2px; }
+
+/* ─── PROCESS ─── */
+.steps { position: relative; }
+.step { display: flex; gap: 18px; padding-bottom: 36px; position: relative; }
+.step:last-child { padding-bottom: 0; }
+.step::before {
+  content: '';
+  position: absolute;
+  left: 17px; top: 40px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold-bd), transparent);
+}
+.step:last-child::before { display: none; }
+.step-n {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 13px; color: var(--gold); font-weight: 700;
+  flex-shrink: 0;
+}
+.step-t { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.step-d { font-size: 14px; color: var(--sub); line-height: 1.7; }
+
+/* ─── CONTACT ─── */
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-k { font-family: var(--mono); font-size: 11px; color: var(--sub); letter-spacing: 1px; text-transform: uppercase; }
+.contact-v { font-size: 15px; color: var(--ink); font-weight: 500; }
+
+/* ─── RESULT BOX ─── */
+.result-box {
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  border-radius: 10px;
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+.result-nums { display: flex; gap: 28px; flex-wrap: wrap; }
+.result-n { text-align: center; }
+.result-nv { font-family: var(--serif); font-size: 22px; color: var(--gold); font-weight: 700; }
+.result-nl { font-family: var(--mono); font-size: 9px; color: var(--sub); margin-top: 2px; letter-spacing: 1px; }
+
+/* ─── GUARANTEE ─── */
+.guarantee {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--ink);
+  padding: 20px var(--gutter);
+}
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer span { font-family: var(--mono); font-size: 10px; color: #58565E; letter-spacing: 1px; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 640px) {
+  :root { --gutter: 16px; }
+  .section { padding: 44px 0; }
+  .del-grid { grid-template-columns: 1fr; }
+  .result-box { flex-direction: column; }
+  .steps .step { gap: 14px; }
+  .cal-grid { gap: 2px; }
+  .feed-3  { gap: 3px; }
+  .caption-ex { grid-template-columns: 38px 1fr; gap: 10px; }
+}
+
+/* ─── PRINT ─── */
+@media print {
+  .section { break-inside: avoid; }
+  .pkg, .card, .browser { break-inside: avoid; }
+  body { font-size: 13px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="wrap" style="position:relative">
+    <div class="label">Propuesta personalizada · 2025</div>
+    <h1 style="margin-bottom:20px">
+      Tu floristería trabajando<br>
+      <span style="color:#C8A96E">mientras tú te centras<br>en las flores.</span>
+    </h1>
+    <p style="font-size:17px; color:#9A9690; max-width:480px; line-height:1.75; margin-bottom:0">
+      Web profesional, respuestas automáticas en WhatsApp e Instagram gestionado con IA. Todo en marcha desde el primer día.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     QUE INCLUYE
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="wrap">
+    <div class="label">Qué ofrezco</div>
+    <h2 style="margin-bottom:10px">Tres herramientas. Un solo proveedor.</h2>
+    <p class="sub" style="max-width:520px; margin-bottom:36px">
+      Me encargo de todo para que no tengas que coordinarte con nadie más.
+    </p>
+
+    <div class="del-grid">
+      <div class="card" style="border-top:2px solid var(--gold)">
+        <div class="label" style="margin-bottom:10px">01</div>
+        <h3 style="margin-bottom:8px">Web profesional</h3>
+        <p class="sub" style="font-size:14px">Catálogo de flores y plantas, servicios, horario, contacto y Google Maps. Diseño adaptado a tu imagen. Visible en móvil y ordenador.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--gold)">
+        <div class="label" style="margin-bottom:10px">02</div>
+        <h3 style="margin-bottom:8px">Asistente WhatsApp</h3>
+        <p class="sub" style="font-size:14px">Responde preguntas, precios y consultas a cualquier hora del día. Entrenado con la información real de tu floristería. Sin que hagas nada.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--gold)">
+        <div class="label" style="margin-bottom:10px">03</div>
+        <h3 style="margin-bottom:8px">Instagram mensual</h3>
+        <p class="sub" style="font-size:14px">12 posts al mes generados con inteligencia artificial. Tú apruebas y se publican solos. Tu cuenta activa sin dedicarle tiempo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAQUETES
+═══════════════════════════════════════════ -->
+<div class="section" style="background:var(--surface)">
+  <div class="wrap">
+    <div class="label">Precios</div>
+    <h2 style="margin-bottom:10px">Cuatro opciones para tu floristería</h2>
+    <p class="sub" style="max-width:520px; margin-bottom:40px">
+      Precio único de puesta en marcha más cuota mensual de mantenimiento. Sin permanencia mínima. Cancelas cuando quieras.
+    </p>
+
+    <div style="display:grid; gap:12px">
+
+      <!-- 1. Solo web -->
+      <div class="pkg">
+        <div class="pkg-layout">
+          <div>
+            <h3 style="margin-bottom:8px">Web profesional</h3>
+            <p class="sub" style="font-size:14px; max-width:420px">Web con catálogo, servicios, horarios, contacto y Google Maps. Diseño adaptado a tu imagen.</p>
+            <div class="pills">
+              <span class="pill">✓ Diseño responsive</span>
+              <span class="pill">✓ Catálogo de productos</span>
+              <span class="pill">✓ Formulario de contacto</span>
+              <span class="pill">✓ Google Maps</span>
+              <span class="pill">✓ Dominio + hosting incluido</span>
+            </div>
+          </div>
+          <div class="pkg-price">
+            <div class="price-big">650€</div>
+            <div class="price-note">puesta en marcha</div>
+            <div class="price-mo">49€/mes</div>
+            <div class="price-note">mantenimiento</div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Web + Instagram (nuevo) -->
+      <div class="pkg">
+        <div class="pkg-layout">
+          <div>
+            <h3 style="margin-bottom:8px">Web + Instagram</h3>
+            <p class="sub" style="font-size:14px; max-width:420px">Web completa más gestión mensual de Instagram con IA: 12 posts, captions, hashtags y publicación automática.</p>
+            <div class="pills">
+              <span class="pill">✓ Web completa</span>
+              <span class="pill">✓ 12 posts Instagram/mes</span>
+              <span class="pill">✓ Captions con IA</span>
+              <span class="pill">✓ Calendario editorial</span>
+              <span class="pill">✓ Publicación automática</span>
+            </div>
+          </div>
+          <div class="pkg-price">
+            <div class="price-big">800€</div>
+            <div class="price-note">puesta en marcha</div>
+            <div class="price-mo">99€/mes</div>
+            <div class="price-note">web + Instagram</div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Web + Chatbot (popular) -->
+      <div class="pkg pkg-featured">
+        <div class="pkg-badge">Más solicitado</div>
+        <div class="pkg-layout">
+          <div>
+            <h3 style="margin-bottom:8px">Web + Chatbot WhatsApp</h3>
+            <p class="sub" style="font-size:14px; max-width:420px">Web más asistente automático en WhatsApp y en la web, entrenado con tu catálogo, precios y preguntas frecuentes reales.</p>
+            <div class="pills">
+              <span class="pill">✓ Web completa</span>
+              <span class="pill">✓ Chatbot WhatsApp Business</span>
+              <span class="pill">✓ Entrenado con tus datos</span>
+              <span class="pill">✓ Respuestas 24/7</span>
+              <span class="pill">✓ 1 semana de soporte</span>
+            </div>
+          </div>
+          <div class="pkg-price">
+            <div class="price-big">950€</div>
+            <div class="price-note">puesta en marcha</div>
+            <div class="price-mo">89€/mes</div>
+            <div class="price-note">mantenimiento</div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Pack completo -->
+      <div class="pkg">
+        <div class="pkg-layout">
+          <div>
+            <h3 style="margin-bottom:8px">Pack completo</h3>
+            <p class="sub" style="font-size:14px; max-width:420px">Web, chatbot y 12 posts de Instagram cada mes. Tu presencia digital en piloto automático mientras te centras en las flores.</p>
+            <div class="pills">
+              <span class="pill">✓ Web completa</span>
+              <span class="pill">✓ Chatbot WhatsApp</span>
+              <span class="pill">✓ 12 posts Instagram/mes</span>
+              <span class="pill">✓ Publicación automática</span>
+              <span class="pill">✓ Todo el mantenimiento</span>
+            </div>
+          </div>
+          <div class="pkg-price">
+            <div class="price-big">1.350€</div>
+            <div class="price-note">puesta en marcha</div>
+            <div class="price-mo">149€/mes</div>
+            <div class="price-note">todo incluido</div>
+            
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /packages -->
+
+    <div class="guarantee">
+      <div style="width:3px; align-self:stretch; background:var(--gold); border-radius:2px; flex-shrink:0"></div>
+      <div>
+        <h3 style="font-size:15px; margin-bottom:6px">Sin permanencia. Sin sorpresas.</h3>
+        <p class="sub" style="font-size:14px">El mantenimiento mensual puede cancelarse cuando quieras. Entrego una demo funcional antes de cobrar nada. Consulta inicial gratuita y sin compromiso.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     CASO REAL
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="wrap">
+    <div class="label">Caso real · Floristería Sarai</div>
+    <h2 style="margin-bottom:10px">Ya lo hemos hecho para una floristería como la tuya</h2>
+    <p class="sub" style="max-width:520px; margin-bottom:36px">
+      Más de 35 años atendiendo clientes solo por teléfono y en persona. En 2025 pusimos en marcha su presencia digital completa, desde cero.
+    </p>
+
+    <div class="del-grid">
+      <div class="card" style="border-top:2px solid var(--gold)">
+        <div class="label" style="margin-bottom:10px">01</div>
+        <h3 style="margin-bottom:8px">Web profesional</h3>
+        <p class="sub" style="font-size:14px">Catálogo de flores y plantas, servicios, horario, contacto y Google Maps. Diseño adaptado a la identidad de Sarai.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--gold)">
+        <div class="label" style="margin-bottom:10px">02</div>
+        <h3 style="margin-bottom:8px">Asistente WhatsApp</h3>
+        <p class="sub" style="font-size:14px">Responde precios, horarios y consultas de bodas a cualquier hora. Entrenado con el catálogo y los datos reales del negocio.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--gold)">
+        <div class="label" style="margin-bottom:10px">03</div>
+        <h3 style="margin-bottom:8px">Instagram mensual</h3>
+        <p class="sub" style="font-size:14px">12 posts al mes generados con inteligencia artificial. Texto, imagen y hashtags. Publicación automática sin intervención.</p>
+      </div>
+    </div>
+
+    <div class="result-box">
+      <div>
+        <div class="label" style="margin-bottom:6px">Resultado</div>
+        <p style="font-size:17px; font-family:'Playfair Display',serif; color:#0F0F0E; font-weight:600; max-width:360px; line-height:1.35">
+          Presencia online completa con atención automatizada 24/7 desde el primer día
+        </p>
+      </div>
+      <div class="result-nums">
+        <div class="result-n"><div class="result-nv">Desde 0</div><div class="result-nl">Presencia digital</div></div>
+        <div class="result-n"><div class="result-nv">24/7</div><div class="result-nl">Sin perder consultas</div></div>
+        <div class="result-n"><div class="result-nv">12</div><div class="result-nl">Posts/mes auto</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     WEB DEMO
+═══════════════════════════════════════════ -->
+<div class="section" style="background:var(--surface)">
+  <div class="wrap">
+    <div class="label">La web que entregamos</div>
+    <h2 style="margin-bottom:8px">Web de Floristería Sarai</h2>
+    <p class="sub" style="max-width:500px; margin-bottom:28px">
+      Así luce la web. La tuya se diseña con tu logo, tus fotos y tus colores propios.
+    </p>
+
+    <div class="browser">
+
+      <!-- Browser chrome -->
+      <div class="browser-bar">
+        <div class="b-dot" style="background:#FF5F57"></div>
+        <div class="b-dot" style="background:#FFBD2E; margin:0 4px"></div>
+        <div class="b-dot" style="background:#28CA41"></div>
+        <div class="b-url">floristeríasarai.es</div>
+      </div>
+
+      <!-- Web hero inside browser — faithful to superb-kleicha-f2522c.netlify.app -->
+      <div class="w-hero" style="position:relative; background:#1a1612; min-height:0">
+        <!-- Nav inside web -->
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:24px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:32px">
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-size:15px; color:#F5F0E8; font-weight:700; letter-spacing:.02em">Floristería Sarai</div>
+            <div style="font-family:'DM Mono',monospace; font-size:9px; color:#9B7A3E; letter-spacing:2px">Est. 1988</div>
+          </div>
+          <div style="display:flex; gap:20px; align-items:center">
+            <span style="font-family:'DM Mono',monospace; font-size:10px; color:#9A9690">Catálogo</span>
+            <span style="font-family:'DM Mono',monospace; font-size:10px; color:#9A9690">Contacto</span>
+            <span style="font-family:'DM Mono',monospace; font-size:10px; color:#C8A96E; border:1px solid rgba(200,169,110,.4); padding:5px 12px; border-radius:2px">93 379 75 04</span>
+          </div>
+        </div>
+        <!-- Hero content -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center">
+          <div>
+            <span style="font-family:'DM Mono',monospace; font-size:9px; color:#9A9690; letter-spacing:2px; display:block; margin-bottom:16px">El Prat de Llobregat · Barcelona</span>
+            <div style="font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,42px); font-weight:700; color:#F5F0E8; line-height:1.1; margin-bottom:16px">Arte<br>en cada<br><em style="color:#C8A96E">flor.</em></div>
+            <p style="font-size:13px; color:#6B6760; line-height:1.75; max-width:280px; margin-bottom:24px">Floristería artesanal desde 1988. Ramos, bodas y plantas con mimo. Solo recogida en tienda en El Prat de Llobregat.</p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap">
+              <span style="background:#C8A96E; color:#1a1612; font-family:'Playfair Display',serif; font-size:11px; letter-spacing:1px; padding:10px 18px; border-radius:2px; cursor:default">Ver catálogo</span>
+              <span style="background:transparent; color:#9A9690; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; padding:10px 18px; border-radius:2px; border:1px solid rgba(255,255,255,.1); cursor:default">Instagram</span>
+            </div>
+          </div>
+          <!-- Hero image -->
+          <div style="aspect-ratio:3/4; border-radius:6px; overflow:hidden; border:1px solid rgba(200,169,110,.15)">
+            <img src="https://images.unsplash.com/photo-1487530811015-780684ee45e7?w=600&q=80&fit=crop" alt="Ramos de flores" style="width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.85) saturate(.9)">
+          </div>
+        </div>
+        @media(max-width:520px){.w-grid{grid-template-columns:1fr!important}}
+      </div>
+
+      <!-- Stats strip inside web -->
+      <div class="w-stats" style="background:#131210">
+        <div class="stat" style="text-align:center"><div class="w-stat-v">36+</div><div class="w-stat-l">Años</div></div>
+        <div class="stat" style="text-align:center"><div class="w-stat-v">4.6★</div><div class="w-stat-l">Google</div></div>
+        <div class="stat" style="text-align:center"><div class="w-stat-v">100%</div><div class="w-stat-l">Artesanal</div></div>
+        <div class="stat" style="text-align:center"><div class="w-stat-v">Lun–Sáb</div><div class="w-stat-l">El Prat</div></div>
+      </div>
+
+      <!-- Catalogue strip -->
+      <div style="background:#1a1612; border-top:1px solid rgba(255,255,255,.06); padding:20px">
+        <div style="font-family:'Playfair Display',serif; font-size:9px; color:#C8A96E; letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px"><div style="width:16px; height:1px; background:#C8A96E"></div>Nuestro catálogo</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px">
+          <div style="background:#131210; border:1px solid rgba(255,255,255,.06); border-radius:4px; padding:16px 12px; text-align:center">
+            <div style="font-family:'Playfair Display',serif; font-size:13px; color:#EDE8DC; margin-bottom:4px">Ramos</div>
+            <div style="font-family:'DM Mono',monospace; font-size:10px; color:#C8A96E">desde 50€</div>
+          </div>
+          <div style="background:#131210; border:1px solid rgba(255,255,255,.06); border-radius:4px; padding:16px 12px; text-align:center">
+            <div style="font-family:'Playfair Display',serif; font-size:13px; color:#EDE8DC; margin-bottom:4px">Novia</div>
+            <div style="font-family:'DM Mono',monospace; font-size:10px; color:#C8A96E">desde 100€</div>
+          </div>
+          <div style="background:#131210; border:1px solid rgba(255,255,255,.06); border-radius:4px; padding:16px 12px; text-align:center">
+            <div style="font-family:'Playfair Display',serif; font-size:13px; color:#EDE8DC; margin-bottom:4px">Plantas</div>
+            <div style="font-family:'DM Mono',monospace; font-size:10px; color:#9A9690">Consultar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat demo -->
+      <div class="w-chat">
+        <div class="chat-lbl">Asistente virtual · WhatsApp y web</div>
+        <div class="msg">
+          <div class="msg-av" style="font-family:'Playfair Display',serif; font-size:10px; color:#C8A96E; background:rgba(200,169,110,.1); border-color:rgba(200,169,110,.3)">S</div>
+          <div class="msg-b">Hola, soy el asistente de Floristería Sarai. ¿En qué puedo ayudarte?</div>
+        </div>
+        <div class="msg msg-u">
+          <div class="msg-b">¿Cuánto cuesta un ramo de novia?</div>
+        </div>
+        <div class="msg">
+          <div class="msg-av" style="font-family:'Playfair Display',serif; font-size:10px; color:#C8A96E; background:rgba(200,169,110,.1); border-color:rgba(200,169,110,.3)">S</div>
+          <div class="msg-b">Los ramos de novia empiezan desde 100€. El precio final depende de las flores, el tamaño y el estilo. Para un presupuesto personalizado puedes llamarnos al 93 379 75 04 o visitarnos en la tienda. ¿Para cuándo es la boda?</div>
+        </div>
+        <div class="msg msg-u">
+          <div class="msg-b">Para septiembre</div>
+        </div>
+        <div class="msg">
+          <div class="msg-av" style="font-family:'Playfair Display',serif; font-size:10px; color:#C8A96E; background:rgba(200,169,110,.1); border-color:rgba(200,169,110,.3)">S</div>
+          <div class="msg-b">Perfecto, hay tiempo para planificarlo con calma. En septiembre trabajamos mucho con flores de temporada. ¿Tienes algún estilo en mente?</div>
+        </div>
+        <div class="quick-r">
+          <span class="qr-btn">Precios</span>
+          <span class="qr-btn">Horario</span>
+          <span class="qr-btn">Bodas</span>
+          <span class="qr-btn">Plantas</span>
+        </div>
+      </div>
+
+      <!-- Contact + horario inside web -->
+      <div class="w-contact" style="background:#131210">
+        <div class="w-contact-col">
+          <span class="w-sec-lbl">Dónde estamos</span>
+          <div class="w-info-row"><span class="w-info-k">Dirección</span><span class="w-info-v">C/ Rosa Ribas i Parellada, 7–9<br>El Prat de Llobregat, 08820</span></div>
+          <div class="w-info-row"><span class="w-info-k">Teléfono</span><span class="w-info-v">93 379 75 04</span></div>
+          <div class="w-info-row"><span class="w-info-k">Recogida</span><span class="w-info-v" style="color:#9A9690">Solo en tienda, sin envíos</span></div>
+        </div>
+        <div class="w-contact-col">
+          <span class="w-sec-lbl">Horario</span>
+          <div class="w-hor-row"><span class="w-hor-d">Lunes–Viernes</span><span class="w-hor-h">09:00–13:30<br>17:00–20:30</span></div>
+          <div class="w-hor-row"><span class="w-hor-d">Sábado</span><span class="w-hor-h">10:00–14:00</span></div>
+          <div class="w-hor-row closed"><span class="w-hor-d">Domingo</span><span class="w-hor-h" style="color:#8B2020">Cerrado</span></div>
+        </div>
+      </div>
+
+    </div><!-- /browser -->
+
+    <p style="margin-top:14px; font-family:var(--mono); font-size:11px; color:var(--sub)">
+      * La web real de tu floristería se diseña con tu logo, tus fotos y tu paleta de colores propia.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FEED MANAGER
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="wrap">
+    <div class="label">Así funciona · Instagram</div>
+    <h2 style="margin-bottom:10px">Instagram en piloto automático</h2>
+    <p class="sub" style="max-width:500px; margin-bottom:36px">
+      Cada mes generamos 12 posts para tu Instagram con inteligencia artificial. Tú los apruebas en un mensaje de WhatsApp y se publican solos.
+    </p>
+
+    <!-- How it works — horizontal rows, no emojis -->
+    <div style="border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:36px">
+      <div style="display:grid; grid-template-columns:48px 1fr; border-bottom:1px solid var(--border)">
+        <div style="background:var(--gold); display:flex; align-items:center; justify-content:center; padding:20px 0">
+          <span style="font-family:var(--serif); font-size:15px; color:#fff; font-weight:700">01</span>
+        </div>
+        <div style="padding:18px 22px">
+          <div style="font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink); margin-bottom:4px">Generación con IA</div>
+          <p style="font-size:13px; color:var(--sub); line-height:1.65">Texto, diseño y hashtags creados automáticamente según el tono de tu floristería y la temporada del mes.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:48px 1fr; border-bottom:1px solid var(--border)">
+        <div style="background:var(--surface); border-right:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:20px 0">
+          <span style="font-family:var(--serif); font-size:15px; color:var(--gold); font-weight:700">02</span>
+        </div>
+        <div style="padding:18px 22px">
+          <div style="font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink); margin-bottom:4px">Revisión y aprobación</div>
+          <p style="font-size:13px; color:var(--sub); line-height:1.65">Recibes el calendario mensual en el gestor de contenido. Apruebas cada post con un clic desde ahí. Sin más trabajo de tu parte.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:48px 1fr">
+        <div style="background:var(--surface); border-right:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:20px 0">
+          <span style="font-family:var(--serif); font-size:15px; color:var(--gold); font-weight:700">03</span>
+        </div>
+        <div style="padding:18px 22px">
+          <div style="font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink); margin-bottom:4px">Publicación automática</div>
+          <p style="font-size:13px; color:var(--sub); line-height:1.65">Los posts se publican solos en los días y horas de mayor audiencia para tu perfil de Instagram.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feed grid preview — professional typographic mockup -->
+    <div class="label" style="margin-bottom:12px">Ejemplo de posts generados</div>
+    <div class="feed-3" style="margin-bottom:28px">
+      <div class="feed-post" style="border:1px solid rgba(200,169,110,.12)">
+        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0006?w=400&q=80&fit=crop" alt="Ramo del día" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(.85)">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 10px 8px">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.6);letter-spacing:1px">@floristeríasarai</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(10px,2vw,13px);color:#fff;line-height:1.3;margin-bottom:4px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)">Ramos<br>de temporada</div>
+            <div style="width:16px;height:1px;background:rgba(200,169,110,.8)"></div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(200,169,110,.9);letter-spacing:1px">RAMO DEL DÍA</div>
+        </div>
+      </div>
+      <div class="feed-post" style="border:1px solid rgba(200,169,110,.12)">
+        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=400&q=80&fit=crop" alt="Consejo floral" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.8)">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 10px 8px">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.6);letter-spacing:1px">@floristeríasarai</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(10px,2vw,13px);color:#fff;line-height:1.3;margin-bottom:4px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)">Cuidar tus<br>plantas</div>
+            <div style="width:16px;height:1px;background:rgba(200,169,110,.8)"></div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(200,169,110,.9);letter-spacing:1px">CONSEJO FLORAL</div>
+        </div>
+      </div>
+      <div class="feed-post" style="border:1px solid rgba(200,169,110,.12)">
+        <img src="https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=400&q=80&fit=crop" alt="Pedido especial" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.85)">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 10px 8px">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.6);letter-spacing:1px">@floristeríasarai</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(10px,2vw,13px);color:#fff;line-height:1.3;margin-bottom:4px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)">Centro de<br>mesa boda</div>
+            <div style="width:16px;height:1px;background:rgba(200,169,110,.8)"></div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(200,169,110,.9);letter-spacing:1px">PEDIDO ESPECIAL</div>
+        </div>
+      </div>
+      <div class="feed-post" style="border:1px solid rgba(200,169,110,.12)">
+        <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc81?w=400&q=80&fit=crop" alt="Temporada" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.85)">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 10px 8px">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.6);letter-spacing:1px">@floristeríasarai</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(10px,2vw,13px);color:#fff;line-height:1.3;margin-bottom:4px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)">Flores de<br>primavera</div>
+            <div style="width:16px;height:1px;background:rgba(200,169,110,.8)"></div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(200,169,110,.9);letter-spacing:1px">TEMPORADA</div>
+        </div>
+      </div>
+      <div class="feed-post" style="border:1px solid rgba(200,169,110,.12)">
+        <img src="https://images.unsplash.com/photo-1459156212016-c812468e2115?w=400&q=80&fit=crop" alt="Planta del mes" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.8)">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 10px 8px">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.6);letter-spacing:1px">@floristeríasarai</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(10px,2vw,13px);color:#fff;line-height:1.3;margin-bottom:4px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)">Monstera<br>Deliciosa</div>
+            <div style="width:16px;height:1px;background:rgba(200,169,110,.8)"></div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(200,169,110,.9);letter-spacing:1px">PLANTA DEL MES</div>
+        </div>
+      </div>
+      <div class="feed-post" style="border:1px solid rgba(200,169,110,.12)">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&q=80&fit=crop" alt="Boda real" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.85)">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 10px 8px">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.6);letter-spacing:1px">@floristeríasarai</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(10px,2vw,13px);color:#fff;line-height:1.3;margin-bottom:4px;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,.6)">Boda Marta<br>y Jordi</div>
+            <div style="width:16px;height:1px;background:rgba(200,169,110,.8)"></div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(200,169,110,.9);letter-spacing:1px">BODA REAL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Captions example -->
+    <div class="label" style="margin-bottom:12px">Captions generados con IA</div>
+    <div class="caption-ex">
+      <div class="cap-thumb" style="overflow:hidden; border-radius:4px; padding:0">
+        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0006?w=120&q=80&fit=crop" alt="Ramo" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8) saturate(.9)">
+      </div>
+      <div>
+        <p class="cap-text">Rosas blancas recién llegadas. Perfectas para bodas de primavera. Pásate esta semana y llévate tu favorita.</p>
+        <div class="cap-tags">#floristeria #rosas #bodas #barcelona #elprat #flores #wedding #novia</div>
+      </div>
+    </div>
+    <div class="caption-ex">
+      <div class="cap-thumb" style="overflow:hidden; border-radius:4px; padding:0">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=120&q=80&fit=crop" alt="Boda" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8) saturate(.9)">
+      </div>
+      <div>
+        <p class="cap-text">Decoración completa para la boda de Marta y Jordi en Sant Boi. 80 comensales, flores silvestres y mucha emoción.</p>
+        <div class="cap-tags">#bodas #decoracionfloral #wedding #floristeriabcn #elprat #novias #bouquet</div>
+      </div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="label" style="margin-bottom:12px; margin-top:28px">Calendario de publicación · Junio</div>
+    <div class="card-surface" style="padding:20px">
+      <div class="cal-grid" style="margin-bottom:6px">
+        <div class="cal-hdr">L</div>
+        <div class="cal-hdr">M</div>
+        <div class="cal-hdr">X</div>
+        <div class="cal-hdr">J</div>
+        <div class="cal-hdr">V</div>
+        <div class="cal-hdr">S</div>
+        <div class="cal-hdr">D</div>
+      </div>
+      <div class="cal-grid">
+        <script>
+          const postDays = new Set([2,5,8,12,16,19,23,26,28,30]);
+          for(let i=0;i<6;i++) document.write('<div class="cal-day" style="opacity:0"></div>');
+          for(let d=1;d<=30;d++){
+            const has = postDays.has(d);
+            document.write('<div class="cal-day'+(has?' post':'')+'"><span>'+d+'</span>'+(has?'<div class="cal-dot"></div>':'')+'</div>');
+          }
+        </script>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; margin-top:12px">
+        <div style="width:8px; height:8px; border-radius:50%; background:var(--gold)"></div>
+        <span style="font-family:var(--mono); font-size:11px; color:var(--sub)">10 publicaciones programadas en junio</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PROCESO
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="wrap">
+    <div class="label">Cómo trabajamos</div>
+    <h2 style="margin-bottom:40px">Del primer contacto al lanzamiento</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div>
+          <div class="step-t">Primera consulta</div>
+          <p class="step-d">Hablamos 20 minutos para entender tu floristería: servicios, precios, tono y qué quieres comunicar. Sin compromiso.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div>
+          <div class="step-t">Diseño y configuración</div>
+          <p class="step-d">Diseño la web con tu imagen y configuro todas las herramientas. El chatbot se entrena con la información real de tu negocio, no con plantillas genéricas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div>
+          <div class="step-t">Demo y ajustes</div>
+          <p class="step-d">Te entrego una demo funcional para que la veas y pruebes antes de pagar nada. Hacemos todos los ajustes necesarios hasta que quede perfecto.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div>
+          <div class="step-t">Lanzamiento y soporte</div>
+          <p class="step-d">La web queda activa. Te explico cómo funciona todo y estoy disponible para cualquier cambio o consulta desde el primer día.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     CONTACTO
+═══════════════════════════════════════════ -->
+<div class="section" style="border-bottom:none">
+  <div class="wrap">
+    <div class="label">Contacto</div>
+    <h2 style="margin-bottom:10px">Hablamos sin compromiso</h2>
+    <p class="sub" style="max-width:440px; margin-bottom:36px">
+      Primera consulta gratuita. Respondo en menos de 24 horas.
+    </p>
+
+    <div style="max-width:440px">
+      <div class="contact-row">
+        <span class="contact-k">Email</span>
+        <span class="contact-v">c.garces.martinez@gmail.com</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-k">WhatsApp</span>
+        <span class="contact-v">Escríbeme directamente</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-k">Ubicación</span>
+        <span class="contact-v">El Prat de Llobregat, Barcelona</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-inner">
+    <span>CARLOS · WEBS E IA PARA NEGOCIOS LOCALES · EL PRAT DE LLOBREGAT</span>
+    <span>c.garces.martinez@gmail.com</span>
+  </div>
+</div>
+
+
+</body>
+</html>
+
+</body>
+</html>
