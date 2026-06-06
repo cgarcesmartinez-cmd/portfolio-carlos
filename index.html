@@ -563,6 +563,10 @@ p { color: var(--body); }
   .cal-grid { gap: 2px; }
   .feed-3  { gap: 3px; }
   .caption-ex { grid-template-columns: 38px 1fr; gap: 10px; }
+  .w-hero-grid { grid-template-columns: 1fr !important; }
+  .w-hero-img  { display: none; }
+  .w-contact   { grid-template-columns: 1fr !important; }
+  .w-contact-col:first-child { border-right: none !important; border-bottom: 1px solid #1E1E26; }
 }
 
 /* ─── PRINT ─── */
@@ -819,7 +823,7 @@ p { color: var(--body); }
       <!-- Web hero inside browser — faithful to superb-kleicha-f2522c.netlify.app -->
       <div class="w-hero" style="position:relative; background:#1a1612; min-height:0">
         <!-- Nav inside web -->
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:24px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:32px">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding-bottom:24px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:32px">
           <div>
             <div style="font-family:'Playfair Display',serif; font-size:15px; color:#F5F0E8; font-weight:700; letter-spacing:.02em">Floristería Sarai</div>
             <div style="font-family:'DM Mono',monospace; font-size:9px; color:#9B7A3E; letter-spacing:2px">Est. 1988</div>
@@ -831,7 +835,7 @@ p { color: var(--body); }
           </div>
         </div>
         <!-- Hero content -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center">
+        <div class="w-hero-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center">
           <div>
             <span style="font-family:'DM Mono',monospace; font-size:9px; color:#9A9690; letter-spacing:2px; display:block; margin-bottom:16px">El Prat de Llobregat · Barcelona</span>
             <div style="font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,42px); font-weight:700; color:#F5F0E8; line-height:1.1; margin-bottom:16px">Arte<br>en cada<br><em style="color:#C8A96E">flor.</em></div>
@@ -842,11 +846,10 @@ p { color: var(--body); }
             </div>
           </div>
           <!-- Hero image -->
-          <div style="aspect-ratio:3/4; border-radius:6px; overflow:hidden; border:1px solid rgba(200,169,110,.15)">
+          <div class="w-hero-img" style="aspect-ratio:3/4; border-radius:6px; overflow:hidden; border:1px solid rgba(200,169,110,.15)">
             <img src="https://images.unsplash.com/photo-1487530811015-780684ee45e7?w=600&q=80&fit=crop" alt="Ramos de flores" style="width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.85) saturate(.9)">
           </div>
         </div>
-        @media(max-width:520px){.w-grid{grid-template-columns:1fr!important}}
       </div>
 
       <!-- Stats strip inside web -->
@@ -860,7 +863,7 @@ p { color: var(--body); }
       <!-- Catalogue strip -->
       <div style="background:#1a1612; border-top:1px solid rgba(255,255,255,.06); padding:20px">
         <div style="font-family:'Playfair Display',serif; font-size:9px; color:#C8A96E; letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px"><div style="width:16px; height:1px; background:#C8A96E"></div>Nuestro catálogo</div>
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(100px,1fr)); gap:8px">
           <div style="background:#131210; border:1px solid rgba(255,255,255,.06); border-radius:4px; padding:16px 12px; text-align:center">
             <div style="font-family:'Playfair Display',serif; font-size:13px; color:#EDE8DC; margin-bottom:4px">Ramos</div>
             <div style="font-family:'DM Mono',monospace; font-size:10px; color:#C8A96E">desde 50€</div>
